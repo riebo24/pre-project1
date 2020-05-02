@@ -1,0 +1,26 @@
+<h2>Products</h2>
+
+<!-- ngFor: 配列をループ処理 -->
+<div *ngFor="let product of products; index as productId">
+  <h3>
+    <a [title]="product.name + ' details' " [routerLink]="['/products', productId]">
+      {{ product.name }}
+    </a>
+  </h3>
+
+<!-- ngIf：真偽によって、表示、非表示を切り替え。（この場合はproductのdescriptionが存在すれば） -->
+  <p *ngIf="product.description">
+    Description: {{ product.description }}
+  </p>
+
+<!-- (click)="share()"　:イベントバウンディング（） （product-list.component.ts）に記載されているshare()のクリックイベントを発火させる-->
+  <button (click)="share()">
+    Share
+  </button> 
+
+  <app-product-alerts
+    [product]="product"
+    (notify)="onNotify()">
+  </app-product-alerts>
+
+</div>
